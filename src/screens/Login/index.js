@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity, StatusBar, Image } from 'react-native';
-
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, StatusBar, Image } from 'react-native';
 
 function LoginScreen({ navigation }) {
-    const width = Dimensions.get("window").width
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -13,7 +11,7 @@ function LoginScreen({ navigation }) {
             <View style={styles.WrapperContent}>
                 <Text style={styles.AppTitle}> DoIt </Text>
 
-                <View style={{ backgroundColor: "#FFFF", height: 220, width: width, borderRadius: 30 }}>
+                <View style={styles.Form}>
                     <View style={styles.ImageTitle} >
                         <Image source={require('../../../assets/cadastro.png')} style={styles.Image}></Image>
                         <View style={styles.WrapperTitle}><Text style={styles.Title}>Log In</Text></View>
@@ -21,7 +19,7 @@ function LoginScreen({ navigation }) {
                     <View style={styles.WrapperInputs}>
                         <TextInput placeholder='Coloque o e-mail/usuário' style={styles.Input} value={email} onChangeText={(e) => setEmail(e)}></TextInput>
                         <TextInput placeholder='Coloque a senha' style={styles.Input} secureTextEntry={true} value={password} onChangeText={(e) => setPassword(e)}></TextInput>
-                        <TouchableOpacity style={styles.Button} onPress={() => navigation.push("Home")}><Text style={styles.TextButton}>Entrar</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.Button} onPress={() => navigation.push("BottomTabs")}><Text style={styles.TextButton}>Entrar</Text></TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -37,6 +35,7 @@ const styles = StyleSheet.create(
         Container: { flex: 1, backgroundColor: "#010115" },
         WrapperContent: { flex: 1, alignItems: 'center', justifyContent: 'center' },
         AppTitle: { color: "#ffff", fontSize: 32, fontWeight: 'bold', fontStyle: 'italic', marginBottom: 50 },
+        Form: { backgroundColor: "#FFFF", height: 220, width: '100%', borderRadius: 30 },
         WrapperTitle: { flexDirection: "row", justifyContent: 'center', paddingHorizontal: 20, paddingVertical: 10 },
         Title: { color: "#010115", fontSize: 20, fontStyle: 'italic', textAlign: 'center' },
         WrapperInputs: { alignItems: 'center', justifyContent: 'center', gap: 10, marginTop: 10 },
@@ -46,8 +45,7 @@ const styles = StyleSheet.create(
         EntryText: { color: "#ffff", textAlign: "center", fontSize: 16, fontWeight: 'bold', marginBottom: 30, paddingHorizontal: 20 },
         EntryTextHighLight: { color: "#ffff", textDecorationStyle: "solid", textDecorationLine: "underline" },
         Image: { height: 60, width: 60, marginRight: 40 },
-        ImageTitle: {flexDirection: "row", paddingHorizontal: 40, marginTop: 20},
-
+        ImageTitle: { flexDirection: "row", paddingHorizontal: 40, marginTop: 20 },
     },
 )
 
