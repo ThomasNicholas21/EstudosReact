@@ -1,7 +1,17 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, StatusBar, Image, TouchableOpacity } from 'react-native';
+import { getData, View, Text, StyleSheet, StatusBar, Image, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Home({ navigation }) {
+    const getData = async () => {
+        try {
+            const jsonValue = await AsyncStorage.getItem('userData');
+            let data = jsonValue != null ? JSON.parse(jsonValue) : null;
+            console.log(data);
+        } catch (e) {
+            // error reading value
+        }
+    };
     return (
         <View style={styles.Container}>
             <StatusBar barStyle={"light-content"} backgroundColor={"#010115"}></StatusBar>
@@ -18,6 +28,9 @@ function Home({ navigation }) {
                 <TouchableOpacity style={styles.Option} onPress={() => navigation.push("CriarAtividades")} >
                     <Image source={require('../../../assets/editar.png')} style={styles.Image}></Image>
                     <Text style={styles.TextImage}>Lista Personalizada</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.Option} onPress={getData}>
+                    <Text style={styles.TextImage}>visualizar dados</Text>
                 </TouchableOpacity>
             </View>
         </View>

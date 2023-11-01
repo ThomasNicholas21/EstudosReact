@@ -1,9 +1,16 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, StatusBar, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, StatusBar, Image, Alert } from 'react-native';
 
 function LoginScreen({ navigation }) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    const loginCheck = () => {
+        if (email === "" || password === "") {
+            return Alert.alert("Preencha todas as informações!")
+        }
+        return navigation.push("BottomTabs")
+    }
 
     return (
         <View style={styles.Container}>
@@ -19,7 +26,7 @@ function LoginScreen({ navigation }) {
                     <View style={styles.WrapperInputs}>
                         <TextInput placeholder='Coloque o e-mail/usuário' style={styles.Input} value={email} onChangeText={(e) => setEmail(e)}></TextInput>
                         <TextInput placeholder='Coloque a senha' style={styles.Input} secureTextEntry={true} value={password} onChangeText={(e) => setPassword(e)}></TextInput>
-                        <TouchableOpacity style={styles.Button} onPress={() => navigation.push("BottomTabs")}><Text style={styles.TextButton}>Entrar</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.Button} onPress={loginCheck}><Text style={styles.TextButton}>Entrar</Text></TouchableOpacity>
                     </View>
                 </View>
             </View>
